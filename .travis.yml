@@ -1,0 +1,40 @@
+  File Edit Options Buffers Tools Help
+
+  # Travis example for Modern C++ by Rafał Pocztarski
+  # For more languages and info see:
+  # https://github.com/rsp/travis-hello#readme
+
+  sudo: false
+  language: cpp
+  os: linux
+  dist: bionic
+  compiler:
+    - gcc
+    - clang
+
+
+  addons:
+    apt:
+      sources:
+        - ubuntu-toolchain-r-test
+        - llvm-toolchain-bionic-5.0
+        - ppa:kubuntu-ppa/backports
+
+      packages:
+        - git
+        - cmake
+        - g++-7
+        - clang-5.0
+        - extra-cmake-modules
+        - doxygen
+  before_script:
+    # create a build folder for the out-of-source build
+    - mkdir build
+    # switch to build directory
+    - cd build
+    # run cmake; here we assume that the project's
+    # top-level CMakeLists.txt is located at '..'
+    - cmake -DCMAKE_BUILD_TYPE=Release ..
+  script:
+    - make
+
